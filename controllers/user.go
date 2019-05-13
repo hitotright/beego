@@ -13,3 +13,21 @@ func (this *UserController) Get() {
 	this.Data["age"] = 23
 	this.TplName = "user.tpl"
 }
+
+func (this * UserController) Index()  {
+
+}
+
+func (this * UserController) Add()  {
+
+}
+
+func (this * UserController) Edit()  {
+
+}
+
+func (this * UserController) Delete()  {
+
+}
+
+
