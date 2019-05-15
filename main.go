@@ -22,7 +22,6 @@ func main() {
 }
 
 func dbInit()  {
-	models.Connect()
 	name := "default"
 	force := true
 	verbose := true
