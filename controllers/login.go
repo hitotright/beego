@@ -1,5 +1,7 @@
 package controllers
 
+import "github.com/hitotright/beego-admin/models"
+
 type LoginController struct {
 	BaseController
 }
@@ -9,11 +11,9 @@ func (this *LoginController) Login(){
 	if this.IsAjax() {
 		login_name := this.GetString("login_name")
 		password := this.GetString("password")
-		user, err := CheckLogin(login_name, password)
+		user, err := models.CheckLogin(login_name, password)
 		if err == nil {
 			this.SetSession("user_info", user)
-			access_list, _ := GetAccessList(user.Id)
-			this.SetSession("access_list", access_list)
 			this.Rsp(true, "登录成功")
 			return
 		} else {
@@ -24,7 +24,7 @@ func (this *LoginController) Login(){
 	}
 	user_info := this.GetSession("user_info")
 	if user_info != nil {
-		this.Ctx.Redirect(302, "/public/index")
+		this.Ctx.Redirect(302, "/")
 	}
 	this.TplName = "login.tpl"
 }

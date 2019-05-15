@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
-	_ "quickstart/routers"
 	"runtime"
 	"testing"
 

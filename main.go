@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "quickstart/routers"
+	_"github.com/hitotright/beego-admin/routers"
 )
 
 func main() {

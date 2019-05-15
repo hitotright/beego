@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 	"github.com/astaxie/beego/orm"
-	"github.com/hitotright/beego-admin/commom"
+	"github.com/hitotright/beego-admin/lib"
 )
 
 type User struct {
@@ -22,19 +22,20 @@ type User struct {
 	Position      *Position   `orm:"rel(fk)" description:"职位编号"`
 }
 
-func (this *User) CheckLogin(login_name , password string) (user User, err error) {
-	user = this.GetUserByLoginName(login_name)
+func CheckLogin(login_name , password string) (user User, err error) {
+	user = GetUserByLoginName(login_name)
 	if(user.UserId == 0){
 		return user,errors.New("用户不存在")
 	}
-	if user.Password != commom.PwdHash(password) {
+	if user.Password != lib.PwdHash(password) {
 		return user, errors.New("密码错误")
 	}
+	return user,nil
 }
 
-func (this *User) GetUserByLoginName(login_name string) (user User) {
+func GetUserByLoginName(login_name string) (user User) {
 	user = User{LoginName: login_name}
 	o := orm.NewOrm()
-	_ := o.Read(&user, "LoginName")
+	_ = o.Read(&user, "LoginName")
 	return user
 }
