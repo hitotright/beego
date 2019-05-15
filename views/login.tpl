@@ -46,7 +46,7 @@
            if(res.status){
                window.location ='/'
            }else{
-
+                alert(res.info)
            }
        })
     }
