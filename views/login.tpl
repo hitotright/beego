@@ -9,12 +9,12 @@
 <div class="am-g">
     <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
         <br>
-        <form method="post" class="am-form">
-            <label for="email">邮箱:</label>
-            <input type="email" name="" id="email" value="">
+        <form method="post" class="am-form" >
+            <label for="login_name">登录名:</label>
+            <input type="text" name="login_name" id="login_name" value="">
             <br>
             <label for="password">密码:</label>
-            <input type="password" name="" id="password" value="">
+            <input type="password" name="password" id="password" value="">
             <br>
             <label for="remember-me">
                 <input id="remember-me" type="checkbox">
@@ -22,8 +22,8 @@
             </label>
             <br />
             <div class="am-cf">
-                <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
-                <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+                <input type="button" onclick="ajaxLogin()" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+                <a target="_blank" class="am-btn am-btn-default am-btn-sm am-fr">忘记密码 ^_^? </a>
             </div>
         </form>
         <hr>
@@ -39,3 +39,15 @@
     <hr>
     <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
 </footer>
+<script>
+    function ajaxLogin() {
+       var data = $('.am-form').serializeArray();
+       $.post('/login',data).then(function (res) {
+           if(res.status){
+               window.location ='/'
+           }else{
+
+           }
+       })
+    }
+</script>

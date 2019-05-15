@@ -7,6 +7,7 @@
 >#### 安装步骤
 ```
 go get github.com/astaxie/beego
+go get github.com/go-sql-driver/mysql
 go build
 ./beego-admin.exe --init
 ./beego-admin.exe
