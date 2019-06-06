@@ -6,7 +6,8 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/beego/admin/src/lib"
 	"github.com/hitotright/beego-admin/models"
-	_"github.com/hitotright/beego-admin/routers"
+	_ "github.com/hitotright/beego-admin/routers"
+	"io/ioutil"
 	"os"
 )
 
@@ -22,12 +23,14 @@ func main() {
 }
 
 func dbInit()  {
+	models.Init()
 	name := "default"
 	force := true
 	verbose := true
 	err := orm.RunSyncdb(name, force, verbose)
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(0)
 	}
 	fmt.Println("insert add user ...")
 	u := new(models.User)
@@ -37,4 +40,19 @@ func dbInit()  {
 	o := orm.NewOrm()
 	o.Insert(u)
 	fmt.Println("insert user end")
+	fmt.Println("exec init.sql ...")
+	f, err := os.Open("init.sql")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(0)
+	}
+	sql,_ := ioutil.ReadAll(f)
+	fmt.Println(string(sql))
+	res, err :=o.Raw(string(sql)).Exec()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(0)
+	}
+	num, _ := res.RowsAffected()
+	fmt.Println("exec init.sql complete：%s",num)
 }

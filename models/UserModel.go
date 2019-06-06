@@ -8,7 +8,7 @@ import (
 )
 
 type User struct {
-	UserId        int64     `orm:"auto;" description:"用户编号"`
+	UserId        int     `orm:"auto;" description:"用户编号"`
 	Username      string    `orm:"unique;size(32)" form:"Username"  valid:"Required;MaxSize(20);MinSize(2)" description:"用户名"`
 	LoginName     string    `orm:"unique;size(32)" form:"LoginName" valid:"Required;MaxSize(20);MinSize(6)" description:"登录名"`
 	Password      string    `orm:"size(32)" form:"Password" valid:"Required;MaxSize(20);MinSize(6)" description:"密码"`
@@ -18,8 +18,8 @@ type User struct {
 	Status        int       `orm:"default(1)" form:"Status" valid:"Range(1,2)" description:"状态：1正常2禁止"`
 	LastLoginTime time.Time `orm:"null;type(datetime)" form:"-" description:"最后登录时间"`
 	CreateTime    time.Time `orm:"type(datetime);auto_now_add" description:"创建时间"`
-	DpId          int64     `orm:"default(1)" description:"部门编号"`
-	PsId          int64     `orm:"default(1)" description:"职位编号"`
+	DpId          int     `orm:"default(1)" description:"部门编号"`
+	PsId          int     `orm:"default(1)" description:"职位编号"`
 }
 
 func CheckLogin(login_name, password string) (user User, err error) {
