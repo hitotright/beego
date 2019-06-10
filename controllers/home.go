@@ -5,5 +5,6 @@ type HomeController struct {
 }
 
 func (this *HomeController) Index() {
+	this.Data["Js"] = "<script src=\"static/js/echarts.min.js\"></script>"
 	this.TplName = "home.tpl"
 }

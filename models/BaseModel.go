@@ -39,7 +39,7 @@ func Connect() {
 		log.Println(err)
 		log.Println(r)
 	} else {
-		log.Println("Database ", db_name, " created")
+		log.Println("Database ", db_name, " ready")
 	}
 	_ = orm.RegisterDataBase("default", db_type, dsnn)
 }

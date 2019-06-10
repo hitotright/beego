@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="static/css/amazeui.min.css" />
     <link rel="stylesheet" href="static/css/admin.css">
     <link rel="stylesheet" href="static/css/app.css">
-    <script src="static/js/echarts.min.js"></script>
     {{.Css}}
 </head>
 <body data-type="index">
