@@ -19,8 +19,8 @@ type Menu struct {
 }
 
 type menuTree struct {
-	MenuId          int
-	PId        	    int
+	MenuId          int64
+	PId        	    int64
 	Name            string
 	Url             string
 	Icon            string
@@ -39,11 +39,11 @@ func GetMenu() ([]menuTree) {
 		logs.Error(err)
 		return []menuTree{}
 	}
-	var pMenuIndex = make(map[int]int,len(pMenu))
+	var pMenuIndex = make(map[int64]int,len(pMenu))
 	tree := make([]menuTree, len(pMenu))
 	for i, p := range pMenu {
-		pMenuIndex[p["MenuId"].(int)] = i
-		tree[i].MenuId = p["MenuId"].(int)
+		pMenuIndex[p["MenuId"].(int64)] = i
+		tree[i].MenuId = p["MenuId"].(int64)
 		tree[i].PId = 0
 		tree[i].Name = p["Name"].(string)
 		tree[i].Url = p["Url"].(string)
@@ -59,9 +59,9 @@ func GetMenu() ([]menuTree) {
 		return tree
 	}
 	for _, m := range cMenu {
-			index,ok := pMenuIndex[m["PId"].(int)]
+			index,ok := pMenuIndex[m["PId"].(int64)]
 			if(ok == true){
-				c := menuTree{m["MenuId"].(int),m["PId"].(int),m["Name"].(string),m["Url"].(string),
+				c := menuTree{m["MenuId"].(int64),m["PId"].(int64),m["Name"].(string),m["Url"].(string),
 					m["Icon"].(string),m["IconColor"].(string),m["TabId"].(string),[]menuTree{}}
 				tree[index].Children = append(tree[index].Children,c)
 			}

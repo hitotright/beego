@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	"github.com/hitotright/beego-admin/models"
 	"strconv"
 	"time"
 )
@@ -18,6 +19,7 @@ func (this *BaseController) Prepare()  {
 	this.Data["Description"] = beego.AppConfig.String("description")
 	this.Data["Css"] = ""
 	this.Data["Js"] = ""
+	this.Data["Menus"] = models.GetMenu()
 }
 
 func (this *BaseController) Rsp(status bool, str string) {
