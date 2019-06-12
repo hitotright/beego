@@ -8,6 +8,8 @@
 ```
 go get github.com/astaxie/beego
 go get github.com/go-sql-driver/mysql
+git clone https://github.com/hitotright/beego-admin.git
+cd beego-admin 
 go build
 ./beego-admin.exe -init
 ./beego-admin.exe
