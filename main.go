@@ -9,6 +9,7 @@ import (
 	_ "github.com/hitotright/beego-admin/routers"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -47,12 +48,18 @@ func dbInit()  {
 		os.Exit(0)
 	}
 	sql,_ := ioutil.ReadAll(f)
-	fmt.Println(string(sql))
-	res, err :=o.Raw(string(sql)).Exec()
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(0)
+	sql_slice :=strings.Split(string(sql),";")
+	for _,s := range sql_slice  {
+		s = strings.ReplaceAll(s,"\n","")
+		s = strings.ReplaceAll(s,"\r","")
+		if(s != ""){
+			fmt.Println(s)
+			_, err :=o.Raw(s).Exec()
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(0)
+			}
+		}
 	}
-	num, _ := res.RowsAffected()
-	fmt.Println("exec init.sql complete：%s",num)
+	fmt.Printf("exec init.sql complete：%d\n",len(sql_slice))
 }

@@ -22,6 +22,10 @@ type User struct {
 	PsId          int     `orm:"default(1)" description:"职位编号"`
 }
 
+func (u *User) TableEngine() string {
+    return "INNODB"
+}
+
 func CheckLogin(login_name, password string) (user User, err error) {
 	user = GetUserByLoginName(login_name)
 	if (user.UserId == 0) {

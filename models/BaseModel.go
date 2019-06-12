@@ -44,10 +44,6 @@ func Connect() {
 	_ = orm.RegisterDataBase("default", db_type, dsnn)
 }
 
-func init()  {
-	Connect()
-}
-
 func Init()  {
 	Connect()
 }

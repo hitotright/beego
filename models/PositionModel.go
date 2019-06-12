@@ -8,6 +8,10 @@ type Position struct {
 	PsName      string    `orm:"unique;size(32)" form:"PsName"  valid:"Required;MaxSize(20);MinSize(2)" description:"职位名"`
 }
 
+func (ps *Position) TableEngine() string {
+    return "INNODB"
+}
+
 func init() {
 	orm.RegisterModel(new(Position))
 }

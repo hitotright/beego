@@ -8,6 +8,10 @@ type Department struct {
 	DpName      int    `orm:"unique;size(32)" form:"DpName"  valid:"Required;MaxSize(20);MinSize(2)" description:"部门名"`
 }
 
+func (dp *Department) TableEngine() string {
+    return "INNODB"
+}
+
 func init() {
 	orm.RegisterModel(new(Department))
 }

@@ -18,6 +18,10 @@ type Menu struct {
 	TabId           string    `orm:"null;unique;size(255)" form:"TabId" valid:"MaxSize(255)" description:"菜单唯一标识"`
 }
 
+func (m *Menu) TableEngine() string {
+    return "INNODB"
+}
+
 type menuTree struct {
 	MenuId          int64
 	PId        	    int64
